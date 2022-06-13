@@ -1,7 +1,7 @@
 package Entities;
 
 // Para o futuro
-public class Administrador {
+public class Administrador extends Funcionario{
 
     // Funcao para validar login de Admin
     public boolean Validarlogin(String senhaAdmin) {

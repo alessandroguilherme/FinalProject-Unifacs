@@ -84,19 +84,24 @@ public class Academia {
                     System.out.print("Salario atual: R$ " + listaDeIstrutores.get(posicaoNaFila).salario + "\n");
                     System.out.print("Turno: " + listaDeIstrutores.get(posicaoNaFila).turno + "\n");
                     System.out.println();
+                    //caso a matricula digitada serja certa e o instrutor seja encontrado colocar o valor 2 em continuarWhile
                     continuarWhile = 2;
+                    //Verificar se o usuario deseja alterar os dados do instrutor buscado
                     System.out.println("DESEJA ALTERAR OS DADOS DO INSTRUTOR?");
                     System.out.println("1 - SIM");
                     System.out.println("2 - NAO");
                     System.out.print("Informe aqui -> ");
                     int certeza = obterInteiroTeclado();
+                    //caso o usuario queira editar os dados do instrutor chamar menu de edicao
                     if (certeza == 1) {
                         menuEditarInstrutor(j);
                     }
                 }
             }
+            //encerrar o while caso o instrutor tenha sido encontrado
             if (continuarWhile == 2) {
                 break;
+            //caso a matricula nao seja correspondente a nenhum instrutor pedir uma nova matricula
             } else {
                 System.out.println("\nMATRICULA NÃO EXISTENTE!, TENTE NOVAMENTE");
                 System.out.print("DIGITE A MATRICULA PARA ENCONTRAR O INSTRUTOR: ");
@@ -153,25 +158,27 @@ public class Academia {
                     System.out.print("Data de Nascimento: " + listaDeAlunos.get(posicaoNaFila).dNascimento + "\n");
                     System.out.print("CPF: " + listaDeAlunos.get(posicaoNaFila).cpf + "\n");
                     System.out.print("Condicao Fisica: " + listaDeAlunos.get(posicaoNaFila).getCondicaoFisica() + "\n");
-                    System.out
-                            .print("Intensidade do Treino: " + listaDeAlunos.get(posicaoNaFila).getNivelAluno() + "\n");
+                    System.out.print("Intensidade do Treino: " + listaDeAlunos.get(posicaoNaFila).getNivelAluno() + "\n");
                     System.out.println();
-
+                    //caso o aluno que tenha a matricula digitada for encontrado colocar o valor 2 em continuarWhile
                     continuarWhile = 2;
-
+                    //verificar se o usuario deseja alterar os dados do aluno encontrado
                     System.out.println("DESEJA ALTERAR OS DADOS DO ALUNO?");
                     System.out.println("1 - SIM");
                     System.out.println("2 - NAO");
                     System.out.print("Informe aqui -> ");
                     int certeza = obterInteiroTeclado();
+                    //caso o usuario queira alterar os dados do aluno chamar o menu de edicao
                     if (certeza == 1) {
                         menuEditarAluno(j);
                     }
                 }
 
             }
+            //caso o aluno correspondente a matricula editada seja encontrado encerrar o while
             if (continuarWhile == 2) {
                 break;
+            //caso a matricula digitada nao seja correspondente a nenhum aluno pedir uma nova
             } else {
                 System.out.println("\nMATRICULA NÃO EXISTENTE!, TENTE NOVAMENTE");
                 System.out.print("DIGITE A MATRICULA PARA ENCONTRAR O ALUNO: ");
@@ -183,6 +190,7 @@ public class Academia {
 
     // Metodo para listar todos os alunos
     public void listarAlunos() {
+        //ordenar os array de alunos por ordem alfabetica
         Collections.sort(listaDeAlunos);
         for (int i = 0; i < listaDeAlunos.size(); i++) {
             System.out.print("\n");
@@ -195,14 +203,16 @@ public class Academia {
             System.out.print("Intensidade do Treino: " + listaDeAlunos.get(i).getNivelAluno() + "\n");
         }
     }
-
+    
+    //metodo para remocao de aluno
     public void removerAluno(int matriculaDigitada) {
 
         int continuarWhile = 1;
 
         while (true) {
-
+            //busca do aluno com a matricula correspondente a digitada
             for (int j = 0; j < listaDeAlunos.size(); j++) {
+                //caso encontre o aluno perguntar se o usuario tem certeza da remocao
                 if ((listaDeAlunos.get(j).getMatricula()).equals(matriculaDigitada)) {
                     System.out.println("\nDESEJA REALMENTE REMOVER ESTE ALUNO DA ACADEMIA?");
                     System.out.println("1 - SIM");
@@ -210,7 +220,7 @@ public class Academia {
                     System.out.print("Informe aqui -> ");
                     int certeza = obterInteiroTeclado();
                     if (certeza == 1) {
-
+                        //remocao do aluno do arraylist
                         listaDeAlunos.remove(j);
                         System.out.println("\nALUNO REMOVIDO COM SUCESSO!");
                         System.out.println("-1 FRANGO\n");
@@ -223,6 +233,7 @@ public class Academia {
                 }
 
             }
+            //caso o a matricula digitada seja correspondente ao aluno encerrar o while, caso nao seja pedir uma nova
             if (continuarWhile == 2) {
                 break;
             } else {
@@ -235,11 +246,13 @@ public class Academia {
 
     }
 
+    //metodo para remocao de instrutor da lista
     public void removerInstrutor(int matriculaDigitada) {
         int continuarWhile = 1;
         while (true) {
-
+            //busca de instrutor correspondente a matricula digitada
             for (int j = 0; j < listaDeIstrutores.size(); j++) {
+                //confirma se o usuari realmente deseja remover o instrutor da lista
                 if ((listaDeIstrutores.get(j).getMatriculaFuncionario()).equals(matriculaDigitada)) {
                     System.out.println("\nDESEJA REALMENTE REMOVER ESTE INSTRUTOR DA ACADEMIA?");
                     System.out.println("1 - SIM");
@@ -259,6 +272,7 @@ public class Academia {
                 }
 
             }
+            //caso a matricula digitada seja correspondente a um instrutor encerrar o while caso nao seja pedir uma nova
             if (continuarWhile == 2) {
                 break;
 
@@ -270,10 +284,12 @@ public class Academia {
 
         }
     }
-
+    
+    //meno para edicao de dados do aluno
     public void menuEditarAluno(int j) {
         do {
-
+            
+            //apresentacao da opcoes e perguntar qual delas o usuario deseja editar
             System.out.println("\nINFORME QUAL INFORMACAO VOCE DESEJA EDITAR\n");
             System.out.println("1 - NOME");
             System.out.println("2 - DATA DE NASCIMENTO");
@@ -331,13 +347,14 @@ public class Academia {
                     listaDeAlunos.get(j).setNivelAluno(nivelAluno);
 
                 }
-
+            //caso a opcao digitada seja invalida pedir uma nova
             } else {
                 System.out.println("\nOPCAO INVALIDA, TENTE NOVAMENTE!");
                 System.out.print("Informe aqui -> ");
                 seletor = obterInteiroTeclado();
 
             }
+            //perguntar se o usuario deseja alterar mais alguma informacao
             System.out.println("DESEJA ALTERAR MAIS ALGUMA COISA?");
             System.out.println("1 - SIM");
             System.out.println("2 - NAO");
@@ -349,10 +366,12 @@ public class Academia {
         } while (true);
 
     }
-
+    
+    //menu de edicao das informacoes do instrutor
     public void menuEditarInstrutor(int j) {
 
         do {
+            //apresentacao da instrucao e perguntar qual o usuario deseja editar
             System.out.println("\nINFORME QUAL INFORMACAO VOCE DESEJA EDITAR\n");
             System.out.println("1 - NOME");
             System.out.println("2 - DATA DE NASCIMENTO");
@@ -396,13 +415,14 @@ public class Academia {
                     listaDeIstrutores.get(j).setTurno(turno);
 
                 }
-
+             //informar caso a opcao escolhida seja invalida e pedir uma nova
             } else {
                 System.out.println("\nOPCAO INVALIDA, TENTE NOVAMENTE!");
                 System.out.print("Informe aqui -> ");
                 seletor = obterInteiroTeclado();
 
             }
+            //perguntar se o usuario deseja alterar mais alguma informacao
             System.out.println("DESEJA ALTERAR MAIS ALGUMA COISA?");
             System.out.println("1 - SIM");
             System.out.println("2 - NAO\n");

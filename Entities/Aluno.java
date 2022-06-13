@@ -73,7 +73,8 @@ public class Aluno extends Pessoa implements Comparable<Aluno> {
     public void buscarAluno(Aluno aluno) {
 
     }
-
+    
+    //metodo para ordenar a lista de aluno em ordem alfabetica
     @Override
     public int compareTo(Aluno aluno) {
         return (this.nome.compareTo(aluno.getNome()));

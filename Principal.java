@@ -8,7 +8,6 @@
 // ----------------------------------------------------------------------
 
 import java.util.Scanner;
-
 import Entities.Academia;
 import Entities.Aluno;
 import Entities.Instrutor;
@@ -16,17 +15,9 @@ import Entities.Instrutor;
 public class Principal {
     public static void main(String[] args) {
 
-        // Seletores de cada menu
         int seletor = 0;
-        /*
-         * int seletorGeral = 0;
-         * int seletorFuncionario = 0;
-         * int seletorLogin = 0;
-         * int seletorFuncoes = 0;
-         * int seletorTurno = 0;
-         * int seletorCondicaoFisica = 0;
-         * int seletorIntensidade = 0;
-         */
+        String senhaAdmin = "sla";
+      
 
         Academia academia = new Academia("45.278.589/0001-22", "Familia Maromba", "Rua dos Maromba");
         System.out.println(academia);
@@ -76,13 +67,27 @@ public class Principal {
 
                 // A condicional if avalia se o usuario deseja logar no Administrador
                 if (seletor == 1) {
+                    
                     // A senha deve ser obrigatoriamente "admin" em letras minusculas
-                    menuDeLogin();
-                    String senhaAdmin = obterStringTeclado();
-                    System.out.println();
-
                     // Verifica se a senha digitada e a correta para ter acesso as funcoes de admin
-                    if (validarLogin(senhaAdmin)) {
+                    
+                    if(!senhaAdmin.equals("admin")){
+                        menuDeLogin();
+                        senhaAdmin = obterStringTeclado();
+                        System.out.println();
+                        
+                        //Enquanto a senha nao for correta pedir para digitar a senha denovo ou digitar sair 
+                        
+                        while (!senhaAdmin.equals("admin") && !senhaAdmin.equals("sair")) {
+                            System.out.println("SENHA INCORRETA, TENTE NOVAMENTE OU DIGITE 'sair' CASO NAO SAIBA!");
+                            System.out.print("senha: ");
+                            senhaAdmin = obterStringTeclado();
+            
+                        }
+                    }
+                    //so entra caso a senha digitada seja a certa, caso ele tenha optado por sair nao vai entrar nas funcoes de admin
+                    
+                    if(senhaAdmin.equals("admin")){
                         menuDeFuncoes();
                         seletor = obterInteiroTeclado();
                         int sairMenuFuncoes = 0;
@@ -102,6 +107,7 @@ public class Principal {
 
                         // Sequencia de if e else para avaliar qual função sera acessada
                         // Caso a opcao 1 seja escolhida sera exibido uma lista com todos os alunos
+                        
                         if (seletor == 1) {
                             System.out.println("LISTA DE ALUNOS CADASTRADOS----------------------");
                             academia.listarAlunos();
@@ -109,6 +115,7 @@ public class Principal {
 
                             // Caso a opcao 2 seja escolhida sera exibido uma lista com todos os instrutores
                             // cadastrados
+                            
                         } else if (seletor == 2) {
 
                             System.out.println("LISTA DE INSTRUTORES CADASTRADOS----------------------");
@@ -117,6 +124,7 @@ public class Principal {
 
                             // Caso a opcao 3 seja escolhida sera uma busca do instrutor com base na
                             // matricula digitada
+                            
                         } else if (seletor == 3) {
 
                             System.out.println("\nDIGITE A MATRICULA PARA ENCONTRAR O INSTRUTOR: ");
@@ -146,13 +154,13 @@ public class Principal {
                             academia.removerInstrutor(matriculaDigitada);
                         }
                     }
-
                 }
 
                 // Acesso ao menu de instrutor caso a opção 2 for escolhida
                 else if (seletor == 2) {
 
                     // Menu de registro do Instrutor
+                    
                     System.out.println();
                     System.out.println("---------BEM VINDO INSTRUTOR--------");
                     System.out.println("\nREGISTRE-SE AQUI\n");
@@ -167,6 +175,7 @@ public class Principal {
                     String cpf = obterStringTeclado();
                     System.out.print("Informe o Salario Atual: ");
                     double salario = obterDoubleTeclado();
+    
 
                     // Menu de Turno - Insere o turno de trabalho do instrutor
                     menuDeTurno();
@@ -278,7 +287,7 @@ public class Principal {
     public static void menuDeRegistroFuncionario1() {
         System.out.println("---------BEM VINDO FUNCIONARIO--------\n");
         System.out.println("ESCOLHA A OPCAO QUE VOCE DESEJA \n");
-        System.out.println("1 - LOGAR ADMINISTRADOR");
+        System.out.println("1 - OPCOES DE ADMINISTRADOR");
         System.out.println("2 - REGISTRAR INSTRUTOR");
         System.out.println("3 - SAIR\n");
         System.out.print("Informe aqui -> ");
@@ -347,13 +356,5 @@ public class Principal {
         return leitor.nextDouble();
     }
 
-    // Funcao para validar login de Admin
-    public static boolean validarLogin(String senhaAdmin) {
-        while (!senhaAdmin.equals("admin")) {
-            System.out.println("SENHA INCORRETA, TENTE NOVAMENTE !");
-            System.out.print("senha: ");
-            senhaAdmin = obterStringTeclado();
-        }
-        return true;
-    }
+
 }

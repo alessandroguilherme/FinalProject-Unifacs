@@ -59,7 +59,8 @@ public class Instrutor extends Funcionario implements Comparable<Instrutor> {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
+    
+    //metodo para ordenar a lista de instrutor por ordem alfabetica
     @Override
     public int compareTo(Instrutor instrutor) {
         return (this.nome.compareTo(instrutor.getNome()));
